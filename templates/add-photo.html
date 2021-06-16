@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+  <title>Add Photo</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <a href="{% url 'all-photos' %}" class="btn btn-dark my-5">Go back</a>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <form method="POST" enctype="multipart/form-data" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Choose Photo</label>
+            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+          <div class="form-group">
+            <label>Select Category</label>
+            <select class="form-control" name="category_selected">
+              <option value="None">---</option>
+              {% for category in categories %}
+              <option value="{{category.id}}">{{category.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Or New Category</label>
+            <input type="text" name="category_new" class="form-control" placeholder="Enter a new Category...">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</html>
